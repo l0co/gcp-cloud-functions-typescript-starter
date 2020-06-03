@@ -2,17 +2,27 @@
   "name": "gcp-cloud-functions-typescript-starter",
   "version": "1.0.0",
   "description": "Google Cloud Functions TypeScript starter project",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
-    "deploy-local": "tsc && functions deploy helloWorldHTTP --trigger-http",
-    "package-zip(windows)": "tsc && powershell Compress-Archive -Force -LiteralPath index.js, package.json, settings.json -DestinationPath helloWorld.zip",
-    "package-zip(linux)": "tsc && zip helloWorld.zip index.js package.json settings.json"
+    "compile": "node_modules/.bin/tsc",
+    "compile-watch": "node_modules/.bin/tsc --watch",
+    "npm-watch": "npm-watch start",
+    "watch": "node_modules/.bin/concurrently --kill-others \"npm run compile-watch\" \"npm run npm-watch\"",
+    "start": "npx @google-cloud/functions-framework --target=helloWorldHTTP",
+    "deploy": "npm run compile && gcloud functions deploy helloWorldHTTP --allow-unauthenticated --entry-point helloWorldHTTP --runtime nodejs10 --trigger-http"
   },
   "author": "Aleksandr Sokolovskii",
   "license": "Apache-2.0",
+  "watch": {
+    "start": "*.js"
+  },
   "devDependencies": {
+    "@google-cloud/functions-framework": "^1.5.0",
     "@types/express": "^4.0.0",
-    "@types/node": "^6.0.0"
+    "@types/node": "^14.0.9",
+    "concurrently": "^5.2.0",
+    "npm-watch": "^0.6.0",
+    "typescript": "^3.9.3"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,8 @@
 import {Request, Response} from "express"
-
-import PubsubEvent = GoogleCloudPlatform.CloudFunctions.PubsubEvent
-import StorageEvent = GoogleCloudPlatform.CloudFunctions.StorageEvent
-import Callback = GoogleCloudPlatform.CloudFunctions.Callback
+import * as settings from "./settings.json"
+import PubsubEvent = GoogleCloudPlatform.CloudFunctions.PubsubEvent;
+import StorageEvent = GoogleCloudPlatform.CloudFunctions.StorageEvent;
+import Callback = GoogleCloudPlatform.CloudFunctions.Callback;
 
 /*
 const pubsub  = require("@google-cloud/pubsub")({
@@ -10,8 +10,6 @@ const pubsub  = require("@google-cloud/pubsub")({
     projectId: "grape-spaceship-123"})
 console.log(pubsub)
 */
-
-import * as settings from "./settings.json"
 
 console.log(settings)
 
